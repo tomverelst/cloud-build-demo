@@ -1,7 +1,11 @@
 # Cloud Build Demo
 
+This project contains a demo application and an example `cloudbuild.yaml` file.
+
+To run the build on Google Cloud, execute the following command:
+
 ```
-$ gcloud builds submit --substitution COMMIT_SHA=$(git rev-parse HEAD)
+$ gcloud builds submit --substitutions COMMIT_SHA=$(git rev-parse HEAD),BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) .
 ```
 
 ## Running locally
@@ -22,9 +26,8 @@ $ gcloud components install cloud-build-local
 Run the build locally:
 
 ```
-$ cloud-local-build \
-  --substitution COMMIT_SHA=$(git rev-parse HEAD) \
-  --substitution BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+$ cloud-build-local \
+  --substitutions COMMIT_SHA=$(git rev-parse HEAD),BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD) \
   --dryrun=false \
   .
 ```
